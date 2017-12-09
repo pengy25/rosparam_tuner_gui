@@ -2,8 +2,6 @@
 import Tkinter as tk
 import rospy
 
-window = tk.Tk()
-
 # Generic class for buttons connected with parameter name and value
 class ParamButton(tk.Button):
   def __init__(self, container, text, param_name, param_val):
@@ -46,30 +44,36 @@ class SetButton(ParamButton):
 
     rospy.set_param(self._param_name.get(), val)
 
+class ParamFrame(tk.Frame):
+  def __init__(self, container, param_name="param name", param_val="param value"):
+    tk.Frame.__init__(self, container)
+
+    tk.Label(self, text="rosparam").grid(row=0, column=0)
+
+    param_name = tk.StringVar()
+    param_val = tk.StringVar()
+    val_type = tk.StringVar()
+    param_name.set("param name")
+    param_val.set("param value")
+    val_type.set("value type")
+
+    GetButton(self, "Get", param_name, param_val).grid(row=0, column=1)
+    SetButton(self, "Set", param_name, val_type, param_val).grid(row=0, column=2)
+
+    tk.Entry(self, textvariable=param_name).grid(row=0, column=3)
+    tk.OptionMenu(self, val_type, "string", "int", "float").grid(row=0, column=4)
+    tk.Entry(self, textvariable=param_val).grid(row=0, column=5)
+
 # Test code for GUI
 def main():
+  window = tk.Tk()
+
   rospy.init_node("single_param_node")
   while rospy.Time.now().to_sec() == 0:
     pass
 
-  majorFrame = tk.Frame(window)
+  majorFrame = ParamFrame(window)
   majorFrame.pack()
-
-  tk.Label(majorFrame, text="rosparam").grid(row=0, column=0)
-
-  param_name = tk.StringVar()
-  param_val = tk.StringVar()
-  val_type = tk.StringVar()
-  param_name.set("param name")
-  param_val.set("param value")
-  val_type.set("value type")
-
-  GetButton(majorFrame, "Get", param_name, param_val).grid(row=0, column=1)
-  SetButton(majorFrame, "Set", param_name, val_type, param_val).grid(row=0, column=2)
-
-  tk.Entry(majorFrame, textvariable=param_name).grid(row=0, column=3)
-  tk.OptionMenu(majorFrame, val_type, "string", "int", "float").grid(row=0, column=4)
-  tk.Entry(majorFrame, textvariable=param_val).grid(row=0, column=5)
 
   window.mainloop()
 
