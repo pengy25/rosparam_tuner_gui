@@ -33,6 +33,10 @@ class ListFrame(tk.Frame):
     self.addButton.pack(fill=tk.X)
 
 def main():
+  rospy.init_node("multiparam_node")
+  while rospy.Time.now().to_sec() == 0:
+    pass
+
   window = tk.Tk()
   majorFrame = ListFrame(window)
   majorFrame.pack(fill=tk.X)
