@@ -45,10 +45,9 @@ class SetButton(ParamButton):
     rospy.set_param(self._param_name.get(), val)
 
 class ParamFrame(tk.Frame):
-  def __init__(self, container, param_name="param name", param_val="param value"):
-    tk.Frame.__init__(self, container)
-
-    tk.Label(self, text="rosparam").grid(row=0, column=0)
+  def __init__(self, container, param_name="param name", param_val="param value", *args):
+    tk.Frame.__init__(self, container, args)
+    tk.Label(self, text="rosparam").pack(side=tk.LEFT)
 
     param_name = tk.StringVar()
     param_val = tk.StringVar()
@@ -57,12 +56,12 @@ class ParamFrame(tk.Frame):
     param_val.set("param value")
     val_type.set("value type")
 
-    GetButton(self, "Get", param_name, param_val).grid(row=0, column=1)
-    SetButton(self, "Set", param_name, val_type, param_val).grid(row=0, column=2)
+    GetButton(self, "Get", param_name, param_val).pack(side=tk.LEFT)
+    SetButton(self, "Set", param_name, val_type, param_val).pack(side=tk.LEFT)
 
-    tk.Entry(self, textvariable=param_name).grid(row=0, column=3)
-    tk.OptionMenu(self, val_type, "string", "int", "float").grid(row=0, column=4)
-    tk.Entry(self, textvariable=param_val).grid(row=0, column=5)
+    tk.Entry(self, textvariable=param_name).pack(side=tk.LEFT)
+    tk.OptionMenu(self, val_type, "string", "int", "float").pack(side=tk.LEFT)
+    tk.Entry(self, textvariable=param_val).pack(side=tk.LEFT)
 
 # Test code for GUI
 def main():
@@ -73,7 +72,7 @@ def main():
     pass
 
   majorFrame = ParamFrame(window)
-  majorFrame.pack()
+  majorFrame.pack(side=tk.LEFT)
 
   window.mainloop()
 

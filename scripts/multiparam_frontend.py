@@ -24,7 +24,7 @@ class ItemFrame(tk.Frame):
 class ListFrame(tk.Frame):
   def __init__(self, container):
     tk.Frame.__init__(self, container)
-    self.addButton = tk.Button(self, text="+", command=self.callback)
+    self.addButton = tk.Button(self, text="+", width=80, command=self.callback)
     self.addButton.pack(fill=tk.X)
 
   def callback(self):
