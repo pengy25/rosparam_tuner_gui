@@ -59,9 +59,9 @@ class ParamFrame(tk.Frame):
     GetButton(self, "Get", param_name, param_val).pack(side=tk.LEFT)
     SetButton(self, "Set", param_name, val_type, param_val).pack(side=tk.LEFT)
 
-    tk.Entry(self, textvariable=param_name).pack(side=tk.LEFT)
+    tk.Entry(self, textvariable=param_name).pack(side=tk.LEFT, fill=tk.BOTH, expand=tk.YES)
     tk.OptionMenu(self, val_type, "string", "int", "float").pack(side=tk.LEFT)
-    tk.Entry(self, textvariable=param_val).pack(side=tk.LEFT)
+    tk.Entry(self, textvariable=param_val).pack(side=tk.LEFT, fill=tk.BOTH, expand=tk.YES)
 
 # Test code for GUI
 def main():
@@ -72,7 +72,7 @@ def main():
     pass
 
   majorFrame = ParamFrame(window)
-  majorFrame.pack(side=tk.LEFT)
+  majorFrame.pack(side=tk.LEFT, fill=tk.BOTH, expand=tk.YES)
 
   window.mainloop()
 

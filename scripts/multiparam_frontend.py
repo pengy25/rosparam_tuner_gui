@@ -9,7 +9,7 @@ class ItemFrame(tk.Frame):
     self.deleteButton = tk.Button(self, text="-", command=self.callback)
     self.paramFrame = ParamFrame(self)
     self.deleteButton.pack(side=tk.LEFT)
-    self.paramFrame.pack(side=tk.LEFT)
+    self.paramFrame.pack(side=tk.LEFT, fill=tk.X, expand=tk.YES)
 
   def callback(self):
     self.deleteButton.pack_forget()
@@ -25,12 +25,12 @@ class ListFrame(tk.Frame):
   def __init__(self, container):
     tk.Frame.__init__(self, container)
     self.addButton = tk.Button(self, text="+", width=80, command=self.callback)
-    self.addButton.pack(fill=tk.X)
+    self.addButton.pack(fill=tk.X, expand=tk.YES)
 
   def callback(self):
     self.addButton.pack_forget()
-    ItemFrame(self).pack(fill=tk.X)
-    self.addButton.pack(fill=tk.X)
+    ItemFrame(self).pack(fill=tk.X, expand=tk.YES)
+    self.addButton.pack(fill=tk.X, expand=tk.YES)
 
 def main():
   rospy.init_node("multiparam_node")
@@ -39,7 +39,7 @@ def main():
 
   window = tk.Tk()
   majorFrame = ListFrame(window)
-  majorFrame.pack(fill=tk.X)
+  majorFrame.pack(fill=tk.X, expand=tk.YES)
 
   window.mainloop()
 
