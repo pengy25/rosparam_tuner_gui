@@ -44,7 +44,7 @@ class SetButton(ParamButton):
 
     rospy.set_param(self._param_name.get(), val)
 
-class ParamFrame(tk.Frame):
+class SingleParamFrame(tk.Frame):
   def __init__(self, container, param_name="param name", param_val="param value", *args):
     tk.Frame.__init__(self, container, args)
     tk.Label(self, text="rosparam").pack(side=tk.LEFT)
@@ -63,18 +63,3 @@ class ParamFrame(tk.Frame):
     tk.OptionMenu(self, val_type, "string", "int", "float").pack(side=tk.LEFT)
     tk.Entry(self, textvariable=param_val).pack(side=tk.LEFT, fill=tk.BOTH, expand=tk.YES)
 
-# Test code for GUI
-def main():
-  window = tk.Tk()
-
-  rospy.init_node("single_param_node")
-  while rospy.Time.now().to_sec() == 0:
-    pass
-
-  majorFrame = ParamFrame(window)
-  majorFrame.pack(side=tk.LEFT, fill=tk.BOTH, expand=tk.YES)
-
-  window.mainloop()
-
-if __name__ == '__main__':
-  main()

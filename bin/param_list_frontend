@@ -1,0 +1,27 @@
+#! /usr/bin/env python
+import Tkinter as tk
+import rospy
+from rosparam_tuner_gui import ParamListFrame
+
+def main():
+  rospy.init_node("param_list_node")
+  while rospy.Time.now().to_sec() == 0:
+    pass
+
+  window = tk.Tk()
+
+  frame1 = tk.Frame(window)
+  frame1.pack(fill=tk.BOTH, expand=tk.YES)
+
+  paramList = ParamListFrame(frame1)
+  paramList.pack(fill=tk.BOTH, expand=tk.YES)
+
+  frame2 = tk.Frame(window)
+  frame2.pack(fill=tk.X, expand=tk.YES)
+
+  tk.Button(frame2, text="Update", command=paramList.update).pack(side=tk.RIGHT)
+
+  tk.mainloop()
+
+if __name__ == "__main__":
+  main()

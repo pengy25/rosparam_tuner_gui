@@ -1,9 +1,9 @@
 #! /usr/bin/env python
 import Tkinter as tk
 import rospy
-from single_param_frontend import ParamFrame
+from .single_param_frame import SingleParamFrame
 
-class ListFrame(tk.Frame):
+class MultiParamFrame(tk.Frame):
   def __init__(self, container):
     tk.Frame.__init__(self, container)
     tk.Frame.grid_columnconfigure(self, 1, weight=1)
@@ -29,7 +29,7 @@ class ListFrame(tk.Frame):
   def add_callback(self):
     self.emptyFrame()
 
-    item = ParamFrame(self)
+    item = SingleParamFrame(self)
     deleteButton = tk.Button(self, text="-", command=lambda num=self.counter: self.delete_callback(num))
     self.itemLst.append((self.counter, deleteButton, item))
     self.counter += 1
@@ -51,16 +51,3 @@ class ListFrame(tk.Frame):
 
     self.fillFrame()
 
-def main():
-  rospy.init_node("multiparam_node")
-  while rospy.Time.now().to_sec() == 0:
-    pass
-
-  window = tk.Tk()
-  majorFrame = ListFrame(window)
-  majorFrame.pack(fill=tk.BOTH, expand=tk.YES)
-
-  window.mainloop()
-
-if __name__ == "__main__":
-  main()

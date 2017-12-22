@@ -2,7 +2,7 @@
 import Tkinter as tk
 import rospy
 
-class ParamList(tk.Frame):
+class ParamListFrame(tk.Frame):
   def __init__(self, container):
     tk.Frame.__init__(self, container)
     self.scrollbar = tk.Scrollbar(container)
@@ -35,7 +35,7 @@ def main():
   frame1 = tk.Frame(window)
   frame1.pack(fill=tk.BOTH, expand=tk.YES)
 
-  paramList = ParamList(frame1)
+  paramList = ParamListFrame(frame1)
   paramList.pack(fill=tk.BOTH, expand=tk.YES)
 
   frame2 = tk.Frame(window)
