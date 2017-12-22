@@ -3,6 +3,7 @@ import Tkinter as tk
 import rospy
 from .single_param_frame import SingleParamFrame
 
+# This frame provides the functionality to adjust the number of ROS parameters to work on
 class MultiParamFrame(tk.Frame):
   def __init__(self, container):
     tk.Frame.__init__(self, container)

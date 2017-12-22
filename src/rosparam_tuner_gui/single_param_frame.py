@@ -44,6 +44,18 @@ class SetButton(ParamButton):
 
     rospy.set_param(self._param_name.get(), val)
 
+# Button that supports 'rosparam delete'
+class DeleteButton(ParamButton):
+  def __init__(self, *args):
+    ParamButton.__init__(self, *args)
+
+  def callback(self):
+    try:
+      rospy.delete_param(self._param_name.get())
+    except KeyError:
+      self._param_val.set("param name not found")
+
+# A single frame that provides interaction with a specified ROS parameter
 class SingleParamFrame(tk.Frame):
   def __init__(self, container, param_name="param name", param_val="param value", *args):
     tk.Frame.__init__(self, container, args)
@@ -56,6 +68,7 @@ class SingleParamFrame(tk.Frame):
     param_val.set("param value")
     val_type.set("value type")
 
+    DeleteButton(self, "Delete", param_name, param_val).pack(side=tk.LEFT)
     GetButton(self, "Get", param_name, param_val).pack(side=tk.LEFT)
     SetButton(self, "Set", param_name, val_type, param_val).pack(side=tk.LEFT)
 

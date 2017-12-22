@@ -2,6 +2,9 @@
 import Tkinter as tk
 import rospy
 
+# This frame provides a list of the existing ROS parameters in the environment.
+# However, this frame doesn't updates itself automatically when the parameters
+# in the environment are modified.
 class ParamListFrame(tk.Frame):
   def __init__(self, container):
     tk.Frame.__init__(self, container)
@@ -25,25 +28,3 @@ class ParamListFrame(tk.Frame):
     for param in params:
       self.listbox.insert(tk.END, param)
 
-def main():
-  rospy.init_node("list_param_node")
-  while rospy.Time.now().to_sec() == 0:
-    pass
-
-  window = tk.Tk()
-
-  frame1 = tk.Frame(window)
-  frame1.pack(fill=tk.BOTH, expand=tk.YES)
-
-  paramList = ParamListFrame(frame1)
-  paramList.pack(fill=tk.BOTH, expand=tk.YES)
-
-  frame2 = tk.Frame(window)
-  frame2.pack(fill=tk.X, expand=tk.YES)
-
-  tk.Button(frame2, text="Update", command=paramList.update).pack(side=tk.RIGHT)
-
-  tk.mainloop()
-
-if __name__ == "__main__":
-  main()
