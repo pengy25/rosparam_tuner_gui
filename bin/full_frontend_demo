@@ -1,0 +1,27 @@
+#! /usr/bin/env python
+import Tkinter as tk
+import rospy
+from rosparam_tuner_gui import MultiParamFrame, ParamListFrame
+
+def main():
+  rospy.init_node("full_frontend_demo_node")
+  while rospy.Time.now().to_sec() == 0:
+    pass
+
+  window = tk.Tk()
+  window.title("ROSPARAM_TUNER_GUI")
+
+  window.grid_columnconfigure(0, weight=1)
+  window.grid_rowconfigure(1, weight=1)
+
+  paramList = ParamListFrame(window)
+  paramList.grid(row=1, sticky=tk.W+tk.N+tk.E+tk.S)
+  tk.Button(window, text="Update parameter list", command=paramList.update).grid(row=0, sticky=tk.W+tk.E)
+
+  multiParam = MultiParamFrame(window)
+  multiParam.grid(row=2, sticky=tk.W+tk.N+tk.E+tk.S)
+
+  tk.mainloop()
+
+if __name__ == "__main__":
+  main()

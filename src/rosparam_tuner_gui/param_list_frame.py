@@ -8,7 +8,7 @@ import rospy
 class ParamListFrame(tk.Frame):
   def __init__(self, container):
     tk.Frame.__init__(self, container)
-    self.scrollbar = tk.Scrollbar(container)
+    self.scrollbar = tk.Scrollbar(self)
     self.listbox = tk.Listbox(self, yscrollcommand=self.scrollbar.set)
     self.scrollbar.config(command=self.listbox.yview)
 
