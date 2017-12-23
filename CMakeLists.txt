@@ -196,6 +196,9 @@ catkin_install_python(PROGRAMS bin/param_list_frontend
 catkin_install_python(PROGRAMS bin/full_frontend_demo
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
 
+catkin_install_python(PROGRAMS bin/dump_file_reading_demo
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
+
 #############
 ## Testing ##
 #############
