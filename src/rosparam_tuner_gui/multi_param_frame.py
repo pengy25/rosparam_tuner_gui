@@ -8,7 +8,7 @@ class MultiParamFrame(tk.Frame):
   def __init__(self, container):
     tk.Frame.__init__(self, container)
     tk.Frame.grid_columnconfigure(self, 1, weight=1)
-    self.addButton = tk.Button(self, text="+", command=self.add_callback)
+    self.addButton = tk.Button(self, text="+", command=self.addParamFrame)
     self.addButton.grid(row=0, columnspan=2, sticky=tk.W + tk.E)
     self.itemLst = []
     self.counter = 0
@@ -27,17 +27,30 @@ class MultiParamFrame(tk.Frame):
     
     self.addButton.grid(row=len(self.itemLst), columnspan=2,  sticky=tk.W + tk.E)
 
-  def add_callback(self):
+  def getParams(self):
+    res = {}
+    for serial_num, deleteButton, item in self.itemLst:
+      param_name, val_type, param_val = item.getParam()
+      if val_type == "int":
+        param_val = int(param_val)
+      elif val_type == "float":
+        param_val = float(param_val)
+
+      res[param_name] = param_val
+
+    return res
+
+  def addParamFrame(self, param_name="param_name", param_val="param_val"):
     self.emptyFrame()
 
-    item = SingleParamFrame(self)
-    deleteButton = tk.Button(self, text="-", command=lambda num=self.counter: self.delete_callback(num))
+    item = SingleParamFrame(self, param_name=param_name, param_val=param_val)
+    deleteButton = tk.Button(self, text="-", command=lambda num=self.counter: self.deleteParamFrame(num))
     self.itemLst.append((self.counter, deleteButton, item))
     self.counter += 1
 
     self.fillFrame()
 
-  def delete_callback(self, num):
+  def deleteParamFrame(self, num):
     self.emptyFrame()
 
     tmp = self.itemLst

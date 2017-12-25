@@ -1,0 +1,27 @@
+#! /usr/bin/env python
+import Tkinter as tk
+import rospy
+import yaml
+from rosparam_tuner_gui import MultiParamFrame, writeDumpFileDialog
+
+def main():
+  rospy.init_node("dump_file_reader_demo")
+  while rospy.Time.now().to_sec() == 0:
+    pass
+
+  window = tk.Tk()
+
+  # Add some params and write to a file
+  frame = MultiParamFrame(window)
+  frame.addParamFrame("test1", "val1")
+  frame.addParamFrame("test2", "val2")
+  frame.addParamFrame("test3", "val3")
+  frame.pack()
+  content = frame.getParams()
+
+  writeDumpFileDialog(window, content)
+
+  window.mainloop()
+
+if __name__ == "__main__":
+  main()

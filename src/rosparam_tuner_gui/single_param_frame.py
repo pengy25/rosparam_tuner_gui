@@ -32,16 +32,11 @@ class SetButton(ParamButton):
 
   def callback(self):
     val = self._param_val.get()
-    if self._val_type.get() == "string":
-      pass
-    elif self._val_type.get() == "int":
+    if self._val_type.get() == "int":
       val = int(val)
     elif self._val_type.get() == "float":
       val = float(val)
-    else:
-      self._param_val.set("value type not supported")
-      return
-
+    
     rospy.set_param(self._param_name.get(), val)
 
 # Button that supports 'rosparam delete'
@@ -57,22 +52,33 @@ class DeleteButton(ParamButton):
 
 # A single frame that provides interaction with a specified ROS parameter
 class SingleParamFrame(tk.Frame):
-  def __init__(self, container, param_name="param name", param_val="param value", *args):
+  def __init__(self, container, param_name="param_name", param_val="param_value", *args):
     tk.Frame.__init__(self, container, args)
     tk.Label(self, text="rosparam").pack(side=tk.LEFT)
 
-    param_name = tk.StringVar()
-    param_val = tk.StringVar()
-    val_type = tk.StringVar()
-    param_name.set("param name")
-    param_val.set("param value")
-    val_type.set("value type")
+    self.param_name = tk.StringVar()
+    self.param_val = tk.StringVar()
+    self.val_type = tk.StringVar()
+    self.param_name.set(param_name)
+    self.param_val.set(param_val)
+    self.val_type.set("string")  # Assume default type is string
 
-    DeleteButton(self, "Delete", param_name, param_val).pack(side=tk.LEFT)
-    GetButton(self, "Get", param_name, param_val).pack(side=tk.LEFT)
-    SetButton(self, "Set", param_name, val_type, param_val).pack(side=tk.LEFT)
+    DeleteButton(self, "Delete", self.param_name, self.param_val).pack(side=tk.LEFT)
+    GetButton(self, "Get", self.param_name, self.param_val).pack(side=tk.LEFT)
+    SetButton(self, "Set", self.param_name, self.val_type, self.param_val).pack(side=tk.LEFT)
 
-    tk.Entry(self, textvariable=param_name).pack(side=tk.LEFT, fill=tk.BOTH, expand=tk.YES)
-    tk.OptionMenu(self, val_type, "string", "int", "float").pack(side=tk.LEFT)
-    tk.Entry(self, textvariable=param_val).pack(side=tk.LEFT, fill=tk.BOTH, expand=tk.YES)
+    tk.Entry(self, textvariable=self.param_name).pack(side=tk.LEFT, fill=tk.BOTH, expand=tk.YES)
+    tk.OptionMenu(self, self.val_type, "string", "int", "float").pack(side=tk.LEFT)
+    tk.Entry(self, textvariable=self.param_val).pack(side=tk.LEFT, fill=tk.BOTH, expand=tk.YES)
 
+  def getParam(self):
+    return (self.param_name.get(), self.val_type.get(), self.param_val.get())
+
+  def setParam(self):
+    val = self.param_val.get()
+    if self.val_type == "int":
+      val = int(val)
+    elif self.val_type == "float":
+      val = float(val)
+
+    rospy.set_param(self.param_name.get(), val)

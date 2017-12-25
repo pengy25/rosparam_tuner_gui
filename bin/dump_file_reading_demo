@@ -1,20 +1,23 @@
 #! /usr/bin/env python
 import rospy
-from rosparam_tuner_gui import readDumpFile
+import Tkinter as tk
+from rosparam_tuner_gui import MultiParamFrame, readDumpFileDialog
+
 
 def main():
   rospy.init_node("dump_file_reader_demo")
   while rospy.Time.now().to_sec() == 0:
     pass
 
-  argv = rospy.myargv()
-  if len(argv) < 2:
-    print "Usage: rosrun rosparam_tuner_gui dump_file_reader_demo FILE.yaml"
-    return
+  window = tk.Tk()
+  frame = MultiParamFrame(window)
+  frame.pack()
 
-  filename = argv[1]
-  params = readDumpFile(filename)
-  print params
+  params = readDumpFileDialog(window)
+  for param_name, param_val in params.iteritems():
+    frame.addParamFrame(param_name=param_name, param_val=param_val)
+
+  window.mainloop()
 
 if __name__ == "__main__":
   main()

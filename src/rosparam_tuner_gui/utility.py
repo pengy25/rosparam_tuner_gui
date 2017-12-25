@@ -1,24 +1,38 @@
 #! /usr/bin/evn python
 import rospy
 import yaml
+from tkFileDialog import askopenfilename, asksaveasfilename
 
-# This function reads the given yaml file and load the supported value types only
-def readDumpFile(filename):
-  fd = open(filename, "r")
-  content = yaml.safe_load(fd.read())
-  fd.close()
+# This function gives a dialog to obtain the yaml file and load the supported value types only
+def readDumpFileDialog(window):
+  filename = askopenfilename(parent=window, title="Gives a file name", defaultextension=".yaml", filetypes=[("YAML file", "*.yaml")])
 
-  # Filter out the unsupported value type
-  res = {}  
-  for key, value in content.iteritems():
-    if (type(value) is not int and type(value) is not str and type(value) is not float):
-      continue
+  if filename:
+    fd = open(filename, "r")
+    content = yaml.safe_load(fd.read())
+    fd.close()
+  
+    # Filter out the unsupported value type
+    res = {}  
+    for key, value in content.iteritems():
+      if (type(value) is not int and type(value) is not str and type(value) is not float):
+        continue
+  
+      # Remove newlines
+      tmp_val = value
+      if type(tmp_val) is str:
+        tmp_val = tmp_val.strip()
+  
+      res[key.strip()] = tmp_val
+  
+    return res
 
-    # Remove newlines
-    tmp_val = value
-    if type(tmp_val) is str:
-      tmp_val = tmp_val.strip()
+# This function dump the given dictionary into a yaml file with the file name specified through a dialog
+def writeDumpFileDialog(window, content):
+  filename = asksaveasfilename(parent=window, title="Gives a file name", defaultextension=".yaml", filetypes=[("YAML file", "*.yaml")])
 
-    res[key.strip()] = tmp_val
+  if filename:
+    fd = open(filename, "w+")
 
-  return res
+    yaml.dump(content, fd, default_flow_style=False)
+    fd.close()
