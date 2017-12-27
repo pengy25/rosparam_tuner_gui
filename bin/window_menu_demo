@@ -1,0 +1,19 @@
+#! /usr/bin/env python
+import Tkinter as tk
+import rospy
+from rosparam_tuner_gui import MultiParamFrame, WindowMenu
+
+def main():
+  rospy.init_node("window_menu_node")
+  while rospy.Time.now().to_sec() == 0:
+    pass
+
+  window = tk.Tk()
+  frame = MultiParamFrame(window)
+  frame.pack()
+  mainMenu = WindowMenu(window, get_data_command=frame.getParams, write_data_command=frame.addParamFrame)
+
+  window.mainloop()
+
+if __name__ == "__main__":
+  main()

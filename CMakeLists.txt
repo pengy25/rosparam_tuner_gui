@@ -202,6 +202,9 @@ catkin_install_python(PROGRAMS bin/dump_file_reading_demo
 catkin_install_python(PROGRAMS bin/dump_file_writing_demo
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
 
+catkin_install_python(PROGRAMS bin/window_menu_demo
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
+
 #############
 ## Testing ##
 #############
