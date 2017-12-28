@@ -1,7 +1,7 @@
 #! /usr/bin/env python
 import Tkinter as tk
 import rospy
-from rosparam_tuner_gui import MultiParamFrame, ParamListFrame
+from rosparam_tuner_gui import MultiParamFrame, ParamListFrame, WindowMenu
 
 def main():
   rospy.init_node("full_frontend_demo_node")
@@ -20,6 +20,8 @@ def main():
 
   multiParam = MultiParamFrame(window)
   multiParam.grid(row=2, sticky=tk.W+tk.N+tk.E+tk.S)
+
+  menu = WindowMenu(window, get_data_command=multiParam.getParams, write_data_command=multiParam.addParamFrames)
 
   tk.mainloop()
 

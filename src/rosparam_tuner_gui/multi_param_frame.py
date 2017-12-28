@@ -40,15 +40,25 @@ class MultiParamFrame(tk.Frame):
 
     return res
 
-  def addParamFrame(self, param_name="param_name", param_val="param_val"):
+  def addParamFrame(self, param_name="param_name", param_val="param_val", val_type="string"):
     self.emptyFrame()
 
-    item = SingleParamFrame(self, param_name=param_name, param_val=param_val)
+    item = SingleParamFrame(self, param_name=param_name, param_val=param_val, val_type=val_type)
     deleteButton = tk.Button(self, text="-", command=lambda num=self.counter: self.deleteParamFrame(num))
     self.itemLst.append((self.counter, deleteButton, item))
     self.counter += 1
 
     self.fillFrame()
+
+  def addParamFrames(self, params):
+    for param_name, param_val in params.iteritems():
+      val_type = "string"
+      if type(param_val) is int:
+        val_type = "int"
+      elif type(param_val) is float:
+        val_type = "float"
+
+      self.addParamFrame(param_name, param_val, val_type)
 
   def deleteParamFrame(self, num):
     self.emptyFrame()

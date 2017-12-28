@@ -25,6 +25,5 @@ class WindowMenu(tk.Menu):
 
   def readDataHelper(self):
     content = readDumpFileDialog(self.window)
- 
-    for param_name, param_val in content.iteritems():
-      self.write_data_command(param_name, param_val)
+    if content:
+      self.write_data_command(content) 

@@ -52,7 +52,7 @@ class DeleteButton(ParamButton):
 
 # A single frame that provides interaction with a specified ROS parameter
 class SingleParamFrame(tk.Frame):
-  def __init__(self, container, param_name="param_name", param_val="param_value", *args):
+  def __init__(self, container, param_name="param_name", param_val="param_value", val_type="string", *args):
     tk.Frame.__init__(self, container, args)
     tk.Label(self, text="rosparam").pack(side=tk.LEFT)
 
@@ -61,7 +61,7 @@ class SingleParamFrame(tk.Frame):
     self.val_type = tk.StringVar()
     self.param_name.set(param_name)
     self.param_val.set(param_val)
-    self.val_type.set("string")  # Assume default type is string
+    self.val_type.set(val_type)  # Assume default type is string
 
     DeleteButton(self, "Delete", self.param_name, self.param_val).pack(side=tk.LEFT)
     GetButton(self, "Get", self.param_name, self.param_val).pack(side=tk.LEFT)

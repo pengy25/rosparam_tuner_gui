@@ -14,8 +14,7 @@ def main():
   frame.pack()
 
   params = readDumpFileDialog(window)
-  for param_name, param_val in params.iteritems():
-    frame.addParamFrame(param_name=param_name, param_val=param_val)
+  frame.addParamFrames(params)
 
   window.mainloop()
 

@@ -11,7 +11,7 @@ def main():
   window = tk.Tk()
   frame = MultiParamFrame(window)
   frame.pack()
-  mainMenu = WindowMenu(window, get_data_command=frame.getParams, write_data_command=frame.addParamFrame)
+  mainMenu = WindowMenu(window, get_data_command=frame.getParams, write_data_command=frame.addParamFrames)
 
   window.mainloop()
 
