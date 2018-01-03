@@ -17,7 +17,7 @@ def main():
   frame.addParamFrame("test2", "val2")
   frame.addParamFrame("test3", "val3")
   frame.pack()
-  content = frame.getParams()
+  content = frame.exportParams()
 
   writeDumpFileDialog(window, content)
 

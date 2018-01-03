@@ -79,8 +79,10 @@ class SingleParamFrame(tk.Frame):
     self.param_val.set(param_val)
     self.val_type.set("some undetermined value type")
 
-    DeleteButton(self, "Delete", self.param_name, self.param_val, self.val_type).pack(side=tk.LEFT)
-    GetButton(self, "Get", self.param_name, self.param_val, self.val_type).pack(side=tk.LEFT)
+    self.deleteButton = DeleteButton(self, "Delete", self.param_name, self.param_val, self.val_type)
+    self.deleteButton.pack(side=tk.LEFT)
+    self.getButton = GetButton(self, "Get", self.param_name, self.param_val, self.val_type)
+    self.getButton.pack(side=tk.LEFT)
     self.setButton = SetButton(self, "Set", self.param_name, self.param_val, self.val_type)
     self.setButton.pack(side=tk.LEFT)
 
@@ -89,7 +91,7 @@ class SingleParamFrame(tk.Frame):
     tk.Label(self, text=" of ").pack(side=tk.LEFT)
     tk.Label(self, textvariable=self.val_type).pack(side=tk.LEFT)
 
-  def getParam(self):
+  def exportParam(self):
     yaml_str = self.param_name.get() + ": " + self.param_val.get()
     res = yaml.safe_load(yaml_str)
 
@@ -100,5 +102,11 @@ class SingleParamFrame(tk.Frame):
     for param_name, param_val in res.iteritems():
       return (param_name, param_val)
 
+  def getParam(self):
+    self.getButton.callback()
+
   def setParam(self):
     self.setButton.callback()
+
+  def deleteParam(self):
+    self.deleteButton.callback()

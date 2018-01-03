@@ -21,7 +21,7 @@ def main():
   multiParam = MultiParamFrame(window)
   multiParam.grid(row=2, sticky=tk.W+tk.N+tk.E+tk.S)
 
-  menu = WindowMenu(window, get_data_command=multiParam.getParams, write_data_command=multiParam.addParamFrames)
+  menu = WindowMenu(window, get_data_command=multiParam.exportParams, write_data_command=multiParam.addParamFrames)
 
   tk.mainloop()
 
