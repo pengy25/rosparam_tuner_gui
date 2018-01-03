@@ -14,7 +14,9 @@ def main():
   frame.pack()
 
   params = readDumpFileDialog(window)
-  frame.addParamFrames(params)
+
+  if params:
+    frame.addParamFrames(params)
 
   window.mainloop()
 
