@@ -4,14 +4,23 @@ A package that provides components for building GUI for rosparam adjustment on l
 
 ## Provided component
 1. SingleParamFrame:
+
 ...A frame component for single parameter adjustment.
+
 2. MultiParamFrame:
+
 ...A frame component that allows adding/removing SingleParamFrame in GUI.
+
 3. ParamListFrame:
+
 ...A frame component for existing rosparam display.
+
 4. WindowMenu:
+
 ...A Menu component that provides options to read/write dump files.
+
 5. Helper utility:
+
 ...Helper functions to read/write rosparam dump file.
 
 ## Runable demo for full functionalities
