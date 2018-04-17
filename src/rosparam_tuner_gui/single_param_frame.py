@@ -36,7 +36,7 @@ class GetButton(ParamButton):
 
     else:
       self._param_val.set("param name not found")
-      self._val_type.set("some undetermined value type") 
+      self._val_type.set("some undetermined value type")
 
 # Button that supports 'rosparam set'
 class SetButton(ParamButton):
@@ -68,7 +68,8 @@ class DeleteButton(ParamButton):
 
 # A single frame that provides interaction with a specified ROS parameter
 class SingleParamFrame(tk.Frame):
-  def __init__(self, container, param_name="param_name", param_val="param_value", *args):
+  def __init__(self, container, param_name="param_name",\
+  param_val="param_value", *args):
     tk.Frame.__init__(self, container, args)
     tk.Label(self, text="rosparam").pack(side=tk.LEFT)
 
@@ -79,15 +80,20 @@ class SingleParamFrame(tk.Frame):
     self.param_val.set(param_val)
     self.val_type.set("some undetermined value type")
 
-    self.deleteButton = DeleteButton(self, "Delete", self.param_name, self.param_val, self.val_type)
+    self.deleteButton = DeleteButton(self, "Delete", self.param_name,\
+    self.param_val, self.val_type)
     self.deleteButton.pack(side=tk.LEFT)
-    self.getButton = GetButton(self, "Get", self.param_name, self.param_val, self.val_type)
+    self.getButton = GetButton(self, "Get", self.param_name,\
+    self.param_val, self.val_type)
     self.getButton.pack(side=tk.LEFT)
-    self.setButton = SetButton(self, "Set", self.param_name, self.param_val, self.val_type)
+    self.setButton = SetButton(self, "Set", self.param_name,\
+    self.param_val, self.val_type)
     self.setButton.pack(side=tk.LEFT)
 
-    tk.Entry(self, textvariable=self.param_name).pack(side=tk.LEFT, fill=tk.BOTH, expand=tk.YES)
-    tk.Entry(self, textvariable=self.param_val).pack(side=tk.LEFT, fill=tk.BOTH, expand=tk.YES)
+    tk.Entry(self, textvariable=self.param_name).pack(side=tk.LEFT,\
+    fill=tk.BOTH, expand=tk.YES)
+    tk.Entry(self, textvariable=self.param_val).pack(side=tk.LEFT,\
+    fill=tk.BOTH, expand=tk.YES)
     tk.Label(self, text=" of ").pack(side=tk.LEFT)
     tk.Label(self, textvariable=self.val_type).pack(side=tk.LEFT)
 

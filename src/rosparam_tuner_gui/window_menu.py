@@ -10,8 +10,10 @@ class WindowMenu(tk.Menu):
     window.config(menu=self)
 
     self.iomenu = tk.Menu(self)
-    self.iomenu.add_command(label="Read params from a file", command=self.readDataHelper)
-    self.iomenu.add_command(label="Write params to a file", command=self.writeDataHelper)
+    self.iomenu.add_command(label="Read params from a file",\
+    command=self.readDataHelper)
+    self.iomenu.add_command(label="Write params to a file",\
+    command=self.writeDataHelper)
 
     tk.Menu.add_cascade(self, label="File", menu=self.iomenu)
 
@@ -26,4 +28,4 @@ class WindowMenu(tk.Menu):
   def readDataHelper(self):
     content = readDumpFileDialog(self.window)
     if content:
-      self.write_data_command(content) 
+      self.write_data_command(content)
